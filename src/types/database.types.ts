@@ -9,20 +9,31 @@ export type Database = {
           date: string;
           id: number;
           steps: number;
+          user_id: string;
         };
         Insert: {
           created_at?: string;
           date?: string;
           id?: number;
           steps?: number;
+          user_id?: string;
         };
         Update: {
           created_at?: string;
           date?: string;
           id?: number;
           steps?: number;
+          user_id?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: 'steps_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
       };
     };
     Views: {
