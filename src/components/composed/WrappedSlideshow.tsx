@@ -1,0 +1,45 @@
+'use client';
+
+import { ComponentProps, HTMLAttributes, useEffect, useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import TotalStepsSlide from '@/components/slides/TotalStepsSlide';
+import AverageStepsSlide from '@/components/slides/AverageStepsSlide';
+import StepsGraphSlide from '@/components/slides/StepsGraphSlide';
+import { User } from '@supabase/supabase-js';
+import { useUserStepsStore } from '@/stores/userStepsStore';
+
+export interface WrappedSlideshowProps extends ComponentProps<'div'> {
+  user: User;
+}
+
+export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
+  const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide];
+
+  const { fetchSteps, loading } = useUserStepsStore();
+
+  useEffect(() => {
+    fetchSteps(user);
+  }, [user, fetchSteps]);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const SlideComponent = slides[currentSlide];
+
+  return (
+    <div className="h-screen flex flex-col">
+      {loading ? <div>Loading wrapped...</div> : <SlideComponent />}
+      <div className="flex justify-between mt-4">
+        <Button onClick={goToPrevSlide}>Previous</Button>
+        <Button onClick={goToNextSlide}>Next</Button>
+      </div>
+    </div>
+  );
+}

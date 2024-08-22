@@ -51,6 +51,8 @@ export type Database = {
   };
 };
 
+export type StepsRow = Database['public']['Tables']['steps']['Row'];
+
 type PublicSchema = Database[Extract<keyof Database, 'public'>];
 
 export type Tables<
