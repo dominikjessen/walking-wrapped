@@ -18,11 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div>
-          <nav className="">
-            <AuthButton />
-          </nav>
-        </div>
+        <nav className="absolute right-2 top-2">
+          <AuthButton />
+        </nav>
         <main>{children}</main>
       </body>
     </html>
