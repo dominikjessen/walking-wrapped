@@ -36,8 +36,8 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   return (
     <div className="h-screen flex flex-col">
       {loading ? <div>Loading wrapped...</div> : <SlideComponent />}
-      <div className="flex justify-between mt-4">
-        <Button onClick={goToPrevSlide}>Previous</Button>
+      <div className="flex justify-between gap-4 absolute bottom-2 right-2">
+        <Button onClick={goToPrevSlide}>Prev</Button>
         <Button onClick={goToNextSlide}>Next</Button>
       </div>
     </div>

@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="absolute right-2 top-2">
+        <nav className="absolute right-2 top-2 z-50">
           <AuthButton />
         </nav>
         <main>{children}</main>
