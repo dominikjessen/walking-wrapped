@@ -15,11 +15,12 @@ export interface WrappedSlideshowProps extends ComponentProps<'div'> {
 export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide];
 
-  const { fetchSteps, loading } = useUserStepsStore();
+  const { fetchSteps, fetchAllSteps, loading } = useUserStepsStore();
 
   useEffect(() => {
     fetchSteps(user);
-  }, [user, fetchSteps]);
+    fetchAllSteps();
+  }, [user, fetchSteps, fetchAllSteps]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
