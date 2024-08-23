@@ -1,15 +1,29 @@
+'use client';
+
 import { useUserStepsStore } from '@/stores/userStepsStore';
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { ChartConfig, ChartContainer } from '@/components/ui/chart';
+import { ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+
+const chartConfig = {
+  desktop: {
+    label: 'Desktop',
+    color: '#2563eb'
+  }
+} satisfies ChartConfig;
 
 export default function StepsPerDayGraph() {
   const { steps } = useUserStepsStore();
 
   return (
-    <LineChart width={600} height={300} data={steps} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-      <Line type="monotone" dataKey="steps" stroke="#8884d8" />
-      <XAxis dataKey="date" />
-      <YAxis />
-      <Tooltip />
-    </LineChart>
+    <ChartContainer config={chartConfig} className="min-h-[400px] w-1/2 p-12 bg-white rounded-xl">
+      <LineChart accessibilityLayer data={steps}>
+        <CartesianGrid vertical={false} />
+        <XAxis dataKey="date" />
+        <ChartTooltip content={<ChartTooltipContent />} />
+        <YAxis />
+        <Line type="monotone" dataKey="steps" stroke="#8884d8" />
+      </LineChart>
+    </ChartContainer>
   );
 }
