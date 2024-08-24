@@ -8,13 +8,15 @@ import StepsGraphSlide from '@/components/slides/StepsGraphSlide';
 import LeaderboardsSlide from '@/components/slides/LeaderboardsSlide';
 import { User } from '@supabase/supabase-js';
 import { useUserStepsStore } from '@/stores/userStepsStore';
+import FinalSlide from '../slides/FinalSlide';
+import { useLeaderboardStore } from '@/stores/leaderboardStore';
 
 export interface WrappedSlideshowProps extends ComponentProps<'div'> {
   user: User;
 }
 
 export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
-  const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide, LeaderboardsSlide];
+  const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide, LeaderboardsSlide, FinalSlide];
 
   const { fetchSteps, fetchAllSteps, loading } = useUserStepsStore();
 
@@ -22,6 +24,13 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
     fetchSteps(user);
     fetchAllSteps();
   }, [user, fetchSteps, fetchAllSteps]);
+
+  const { fetchWeeklyLeaderboards, fetchMonthlyLeaderboard } = useLeaderboardStore();
+
+  useEffect(() => {
+    fetchWeeklyLeaderboards();
+    fetchMonthlyLeaderboard();
+  }, [fetchWeeklyLeaderboards, fetchMonthlyLeaderboard]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
 

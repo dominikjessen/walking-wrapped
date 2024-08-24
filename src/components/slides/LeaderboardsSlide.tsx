@@ -1,18 +1,9 @@
 import { useLeaderboardStore } from '@/stores/leaderboardStore';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 import Leaderboard from '../composed/Leaderboard';
 
 export default function LeaderboardsSlide() {
-  const { weeklyLeaderboards, monthlyLeaderboard, fetchWeeklyLeaderboards, fetchMonthlyLeaderboard } = useLeaderboardStore();
-
-  useEffect(() => {
-    fetchWeeklyLeaderboards();
-    fetchMonthlyLeaderboard();
-  }, [fetchWeeklyLeaderboards, fetchMonthlyLeaderboard]);
-
-  console.log('weekly', weeklyLeaderboards);
-  console.log('monthly', monthlyLeaderboard);
+  const { weeklyLeaderboards, monthlyLeaderboard } = useLeaderboardStore();
 
   return (
     <motion.div
