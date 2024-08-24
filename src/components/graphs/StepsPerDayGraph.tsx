@@ -16,7 +16,7 @@ export default function StepsPerDayGraph() {
   const { steps } = useUserStepsStore();
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-[400px] w-1/2 p-12 bg-white rounded-xl">
+    <ChartContainer config={chartConfig} className={`min-h-[320px] w-1/2 p-12 bg-white rounded-xl`}>
       <LineChart accessibilityLayer data={steps}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="date" />
