@@ -1,8 +1,89 @@
+////////////
+// Custom //
+////////////
+
+export type StepsRow = Database['public']['Tables']['steps']['Row'];
+
+///////////////
+// Generated //
+///////////////
+
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
   public: {
     Tables: {
+      leaderboards: {
+        Row: {
+          created_at: string;
+          end_date: string | null;
+          id: number;
+          rank: number | null;
+          start_date: string | null;
+          total_steps: number | null;
+          type: string | null;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          end_date?: string | null;
+          id?: number;
+          rank?: number | null;
+          start_date?: string | null;
+          total_steps?: number | null;
+          type?: string | null;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          end_date?: string | null;
+          id?: number;
+          rank?: number | null;
+          start_date?: string | null;
+          total_steps?: number | null;
+          type?: string | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'leaderboards_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'leaderboards_user_id_fkey1';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      profiles: {
+        Row: {
+          id: string;
+          username: string | null;
+        };
+        Insert: {
+          id: string;
+          username?: string | null;
+        };
+        Update: {
+          id?: string;
+          username?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'profiles_id_fkey';
+            columns: ['id'];
+            isOneToOne: true;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       steps: {
         Row: {
           created_at: string;
@@ -16,7 +97,7 @@ export type Database = {
           date?: string;
           id?: number;
           steps?: number;
-          user_id?: string;
+          user_id: string;
         };
         Update: {
           created_at?: string;
@@ -31,6 +112,13 @@ export type Database = {
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'steps_user_id_fkey1';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
             referencedColumns: ['id'];
           }
         ];
@@ -50,8 +138,6 @@ export type Database = {
     };
   };
 };
-
-export type StepsRow = Database['public']['Tables']['steps']['Row'];
 
 type PublicSchema = Database[Extract<keyof Database, 'public'>];
 
