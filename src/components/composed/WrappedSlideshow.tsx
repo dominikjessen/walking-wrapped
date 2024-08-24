@@ -1,10 +1,11 @@
 'use client';
 
-import { ComponentProps, HTMLAttributes, useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import TotalStepsSlide from '@/components/slides/TotalStepsSlide';
 import AverageStepsSlide from '@/components/slides/AverageStepsSlide';
 import StepsGraphSlide from '@/components/slides/StepsGraphSlide';
+import LeaderboardsSlide from '@/components/slides/LeaderboardsSlide';
 import { User } from '@supabase/supabase-js';
 import { useUserStepsStore } from '@/stores/userStepsStore';
 
@@ -13,7 +14,7 @@ export interface WrappedSlideshowProps extends ComponentProps<'div'> {
 }
 
 export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
-  const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide];
+  const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide, LeaderboardsSlide];
 
   const { fetchSteps, fetchAllSteps, loading } = useUserStepsStore();
 
