@@ -25,3 +25,20 @@ export function formatNumber(
 
   return formatter.format(number);
 }
+
+export function formatSecondsToHoursMinSecs(totalSeconds: number) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  let result = '';
+  if (hours > 0) {
+    result += `${hours}h `;
+  }
+  if (minutes > 0 || hours > 0) {
+    result += `${minutes}m `;
+  }
+  result += `${seconds.toFixed(0)}s`;
+
+  return result.trim();
+}
