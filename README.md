@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Todo
 
-## Getting Started
+# Login
 
-First, run the development server:
+[] Choose one approach, kill the other
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# General
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[] Check mobile & desktop
+[] Make those stat tables
+[] Make goals table
+[] Make walking-buddy table per day
+[] Get both of those into userStepsStore
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Slides & stats needed
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[x] Start slideshow
+[] Total steps - in kilometers, in time, what you could've done (3 fun facts)
+-- total, constants for conversion in FE
+-- array with constants in FE? Pick 3 at random
+[] Step graph + average - maybe how much % more/less that is than world average?
+-- steps data, constant for world steps
+[] Best and worst day - and what position that is compared to everyone
+-- top day, worst day, all days ranked (xth highest, yth lowest (count from bottom))
+[] Goals - how much you achieved, what day you reached your goal
+-- goals in DB, day of reaching goal
+[] Walking buddy - closest person
+-- walking buddy, need closest per day, then get max count for it
+[x] Final slide - download as image
+-- leaderboards
 
-## Learn More
+# Animations and design
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[] Start slideshow
+[] Total steps
+[] Step graph + average
+[] Best and worst day
+[] Goals
+[] Walking buddy
