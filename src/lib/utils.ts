@@ -15,3 +15,13 @@ export function formatDate(dateString: string): string {
 
   return formatter.format(date);
 }
+
+export function formatNumber(
+  number: number,
+  notation: 'standard' | 'scientific' | 'engineering' | 'compact' | undefined = 'standard',
+  decimals: number
+) {
+  const formatter = Intl.NumberFormat('en', { notation, maximumFractionDigits: decimals });
+
+  return formatter.format(number);
+}

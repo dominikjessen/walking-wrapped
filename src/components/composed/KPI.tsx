@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, formatNumber } from '@/lib/utils';
 import { ComponentProps } from 'react';
 
 export interface KPI extends ComponentProps<'div'> {
@@ -8,12 +8,10 @@ export interface KPI extends ComponentProps<'div'> {
 }
 
 export default function KPI({ className, title, value, formatNotation = 'standard' }: KPI) {
-  const formatter = Intl.NumberFormat('en', { notation: formatNotation, maximumFractionDigits: 0 });
-
   return (
     <div className={cn('flex flex-col items-center justify-between gap-2 p-6 border rounded-xl bg-card text-card-foreground shadow', className)}>
       <h2 className="md:text-lg font-semibold text-card-foreground/50">{title}</h2>
-      <span className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">{formatter.format(value)}</span>
+      <span className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">{formatNumber(value, formatNotation, 0)}</span>
     </div>
   );
 }
