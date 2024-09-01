@@ -10,6 +10,8 @@ import { useUserStepsStore } from '@/stores/userStepsStore';
 import FinalSlide from '../slides/FinalSlide';
 import { useLeaderboardStore } from '@/stores/leaderboardStore';
 import { useUserProfileStore } from '@/stores/userProfileStore';
+import WalkingBuddySlide from '../slides/WalkingBuddySlide';
+import { useWalkingBuddiesStore } from '@/stores/walkingBuddiesStore';
 
 export interface WrappedSlideshowProps extends ComponentProps<'div'> {
   user: User;
@@ -41,9 +43,17 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
     fetchMonthlyLeaderboard();
   }, [fetchWeeklyLeaderboards, fetchMonthlyLeaderboard]);
 
+  // Walking Buddies
+
+  const { fetchWalkingBuddies } = useWalkingBuddiesStore();
+
+  useEffect(() => {
+    fetchWalkingBuddies(user);
+  }, [user, fetchWalkingBuddies]);
+
   // Slide management
 
-  const slides = [TotalStepsSlide, StepsGraphSlide, LeaderboardsSlide, FinalSlide];
+  const slides = [TotalStepsSlide, StepsGraphSlide, LeaderboardsSlide, WalkingBuddySlide, FinalSlide];
 
   const [currentSlide, setCurrentSlide] = useState(0);
 

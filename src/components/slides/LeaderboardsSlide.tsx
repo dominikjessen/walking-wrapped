@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Leaderboard from '../composed/Leaderboard';
 
 export default function LeaderboardsSlide() {
-  const { weeklyLeaderboards, monthlyLeaderboard } = useLeaderboardStore();
+  const { weeklyLeaderboards } = useLeaderboardStore();
 
   return (
     <motion.div

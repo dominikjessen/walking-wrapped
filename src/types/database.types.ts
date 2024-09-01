@@ -4,6 +4,7 @@
 
 export type StepsRow = Database['public']['Tables']['steps']['Row'];
 export type ProfilesRow = Database['public']['Tables']['profiles']['Row'];
+export type WalkingBuddyRow = Database['public']['Tables']['walking_buddies']['Row'];
 
 ///////////////
 // Generated //
