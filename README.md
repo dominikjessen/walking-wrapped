@@ -8,8 +8,7 @@
 
 [] Check mobile & desktop
 [] Make those stat tables
-[] Make goals table
-[] Make walking-buddy table per day
+[x] Make walking-buddy table per day
 [] Get both of those into userStepsStore
 
 # Slides & stats needed
@@ -22,8 +21,9 @@
 -- steps data, constant for world steps
 [] Best and worst day - and what position that is compared to everyone
 -- top day, worst day, all days ranked (xth highest, yth lowest (count from bottom))
-[] Goals - how much you achieved, what day you reached your goal
--- goals in DB, day of reaching goal
+[x] Leaderboards slide
+-- All leaderboards per week with highlight for your own position
+-- Maybe even scroll to your position for each?
 [] Walking buddy - closest person
 -- walking buddy, need closest per day, then get max count for it
 [x] Final slide - download as image
@@ -35,5 +35,5 @@
 [] Total steps
 [] Step graph + average
 [] Best and worst day
-[] Goals
+[] Leaderboards
 [] Walking buddy
