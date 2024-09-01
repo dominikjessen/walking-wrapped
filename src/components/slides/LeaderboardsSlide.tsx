@@ -10,11 +10,11 @@ export default function LeaderboardsSlide() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-purple-500 to-blue-500 overflow-hidden w-screen"
+      className="flex flex-col items-center justify-center h-screen bg-orange-100 overflow-hidden w-screen px-8"
     >
-      <div className="w-4/5 mx-auto flex flex-col gap-4">
-        <h1 className="text-4xl font-bold text-white">Slide 4 - Leaderboards</h1>
-        <h2>Weekly Leaderboards</h2>
+      <div className="w-full flex flex-col gap-4">
+        <h2 className="text-2xl">Shall we see how your weeks went?</h2>
+        <p>Here's the full rankings per week:</p>
         <div className="flex gap-4 overflow-x-auto">
           {weeklyLeaderboards.map((leaderboard) => (
             <Leaderboard key={`${leaderboard.start_date}-${leaderboard.end_date}`} leaderboard={leaderboard} scrollable />

@@ -3,7 +3,6 @@
 import { ComponentProps, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import TotalStepsSlide from '@/components/slides/TotalStepsSlide';
-import AverageStepsSlide from '@/components/slides/AverageStepsSlide';
 import StepsGraphSlide from '@/components/slides/StepsGraphSlide';
 import LeaderboardsSlide from '@/components/slides/LeaderboardsSlide';
 import { User } from '@supabase/supabase-js';
@@ -44,7 +43,7 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
 
   // Slide management
 
-  const slides = [TotalStepsSlide, AverageStepsSlide, StepsGraphSlide, LeaderboardsSlide, FinalSlide];
+  const slides = [TotalStepsSlide, StepsGraphSlide, LeaderboardsSlide, FinalSlide];
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -62,8 +61,12 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
     <div className="h-screen flex flex-col">
       {loading ? <div>Loading wrapped...</div> : <SlideComponent />}
       <div className="flex justify-between gap-4 absolute bottom-2 right-2">
-        <Button onClick={goToPrevSlide}>Prev</Button>
-        <Button onClick={goToNextSlide}>Next</Button>
+        <Button onClick={goToPrevSlide} disabled={currentSlide === 0}>
+          Prev
+        </Button>
+        <Button onClick={goToNextSlide} disabled={currentSlide === slides.length - 1}>
+          Next
+        </Button>
       </div>
     </div>
   );
