@@ -30,7 +30,7 @@ export default function LeaderboardsSlide() {
           <div></div>
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold text-white">Final Leaderboard</h2>
-            <Leaderboard key={`1-${monthlyLeaderboard?.start_date}-${monthlyLeaderboard?.end_date}`} leaderboard={monthlyLeaderboard!} scrollable />
+            <Leaderboard key={`${monthlyLeaderboard?.start_date}-${monthlyLeaderboard?.end_date}`} leaderboard={monthlyLeaderboard!} scrollable />
           </div>
         </div>
       </div>

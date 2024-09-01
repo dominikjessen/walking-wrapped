@@ -1,5 +1,4 @@
 import WrappedSlideshow from '@/components/composed/WrappedSlideshow';
-import AuthButton from '@/components/ui/AuthButton';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 

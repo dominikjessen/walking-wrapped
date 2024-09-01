@@ -3,6 +3,7 @@
 ////////////
 
 export type StepsRow = Database['public']['Tables']['steps']['Row'];
+export type ProfilesRow = Database['public']['Tables']['profiles']['Row'];
 
 ///////////////
 // Generated //

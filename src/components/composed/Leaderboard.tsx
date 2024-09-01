@@ -1,19 +1,18 @@
-import { createClient } from '@/utils/supabase/server';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
 import { ComponentProps } from 'react';
 import { LeaderboardEntry } from '@/types/leaderboard';
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate, formatNumber } from '@/lib/utils';
+import { useUserProfileStore } from '@/stores/userProfileStore';
 
 interface LeaderboardProps extends ComponentProps<'div'> {
   leaderboard: LeaderboardEntry;
   scrollable?: boolean;
 }
 
-export default function Leaderboard({ leaderboard, scrollable = false }: LeaderboardProps) {
+export default function Leaderboard({ leaderboard, scrollable = false, className }: LeaderboardProps) {
+  const { profile } = useUserProfileStore();
+
   return (
-    <div className="flex flex-col gap-4 p-4 border rounded bg-pink-100 min-w-[400px]">
+    <div className={cn('flex flex-col gap-4 p-4 border rounded bg-pink-100 min-w-[400px]', className)}>
       <div className="flex gap-2 items-center justify-center">
         <div>{formatDate(leaderboard.start_date)}</div>
         <div>-</div>
@@ -21,10 +20,10 @@ export default function Leaderboard({ leaderboard, scrollable = false }: Leaderb
       </div>
       <ul className={`max-h-28 ${scrollable ? 'overflow-y-auto' : 'overflow-y-hidden'}`}>
         {leaderboard.ranking.map((entry) => (
-          <li className="grid grid-cols-3 py-2 items-center">
+          <li className={cn('grid grid-cols-3 py-2 items-center', entry.user_id === profile?.id && 'bg-green-200')}>
             <span className="text-2xl font-bold">{entry.rank}</span>
             <span className="font-bold">{entry.username}</span>
-            <span className="text-sm ml-auto">{entry.total_steps}</span>
+            <span className="text-sm ml-auto">{formatNumber(entry.total_steps, 'standard', 0)}</span>
           </li>
         ))}
       </ul>

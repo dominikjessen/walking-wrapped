@@ -17,7 +17,7 @@ export default function LeaderboardsSlide() {
         <h2>Weekly Leaderboards</h2>
         <div className="flex gap-4 overflow-x-auto">
           {weeklyLeaderboards.map((leaderboard) => (
-            <Leaderboard key={`1-${leaderboard.start_date}-${leaderboard.end_date}`} leaderboard={leaderboard} scrollable />
+            <Leaderboard key={`${leaderboard.start_date}-${leaderboard.end_date}`} leaderboard={leaderboard} scrollable />
           ))}
         </div>
       </div>
