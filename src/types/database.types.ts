@@ -14,6 +14,51 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      closest_steps: {
+        Row: {
+          closest_partner_id: string;
+          id: number;
+          match_date: string;
+          partner_steps: number;
+          step_difference: number;
+          user_id: string;
+          user_steps: number;
+        };
+        Insert: {
+          closest_partner_id: string;
+          id?: number;
+          match_date: string;
+          partner_steps: number;
+          step_difference: number;
+          user_id: string;
+          user_steps: number;
+        };
+        Update: {
+          closest_partner_id?: string;
+          id?: number;
+          match_date?: string;
+          partner_steps?: number;
+          step_difference?: number;
+          user_id?: string;
+          user_steps?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'closest_steps_closest_partner_id_fkey';
+            columns: ['closest_partner_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'closest_steps_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: true;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       leaderboards: {
         Row: {
           created_at: string;
@@ -117,6 +162,42 @@ export type Database = {
           },
           {
             foreignKeyName: 'steps_user_id_fkey1';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      walking_buddies: {
+        Row: {
+          id: number;
+          number_of_buddy_days: number;
+          partner_id: string;
+          user_id: string;
+        };
+        Insert: {
+          id?: number;
+          number_of_buddy_days: number;
+          partner_id: string;
+          user_id: string;
+        };
+        Update: {
+          id?: number;
+          number_of_buddy_days?: number;
+          partner_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'closest_day_count_closest_partner_id_fkey';
+            columns: ['partner_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'closest_day_count_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'profiles';

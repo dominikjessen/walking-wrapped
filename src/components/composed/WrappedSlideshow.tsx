@@ -27,12 +27,11 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
 
   // Steps
 
-  const { fetchSteps, fetchAllSteps, loading } = useUserStepsStore();
+  const { fetchSteps, loading } = useUserStepsStore();
 
   useEffect(() => {
     fetchSteps(user);
-    fetchAllSteps();
-  }, [user, fetchSteps, fetchAllSteps]);
+  }, [user, fetchSteps]);
 
   // Leaderboards
 
