@@ -6,7 +6,7 @@ export async function fetchAllWeeklyLeaderboards() {
 
   const { data, error } = await supabase
     .from('leaderboards')
-    .select('type, start_date, end_date, total_steps, rank, profiles(username)')
+    .select('type, start_date, end_date, total_steps, rank, profiles(username, id)')
     .eq('type', 'weekly')
     .order('start_date', { ascending: true })
     .order('rank', { ascending: true });
@@ -24,7 +24,7 @@ export async function fetchMonthlyLeaderboard() {
 
   const { data, error } = await supabase
     .from('leaderboards')
-    .select('type, start_date, end_date, total_steps, rank, profiles(username)')
+    .select('type, start_date, end_date, total_steps, rank, profiles(username, id)')
     .eq('type', 'monthly')
     .order('rank', { ascending: true });
 
@@ -54,6 +54,7 @@ export function prepareLeaderboards(rows: LeaderboardRow[]) {
 
     if (weekEntry) {
       weekEntry.ranking.push({
+        user_id: entry.profiles?.id ?? '',
         rank: entry.rank as number,
         username: entry.profiles?.username ?? '',
         total_steps: entry.total_steps as number

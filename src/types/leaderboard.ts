@@ -5,6 +5,7 @@ export type LeaderboardRow = {
   total_steps: number | null;
   rank: number | null;
   profiles: {
+    id: string | null;
     username: string | null;
   } | null;
 };
@@ -18,7 +19,8 @@ export type LeaderboardEntry = {
 };
 
 export type RankingEntry = {
-  rank: number;
+  user_id: string;
   username: string;
+  rank: number;
   total_steps: number;
 };
