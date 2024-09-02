@@ -6,6 +6,8 @@ import { devtools } from 'zustand/middleware';
 
 type UserStepsState = {
   steps: StepsRow[];
+  topDay: StepsRow | null;
+  bottomDay: StepsRow | null;
   loading: boolean;
   error: string | null;
   fetchSteps: (user: User) => Promise<void>;
@@ -15,7 +17,8 @@ export const useUserStepsStore = create<UserStepsState>()(
   devtools(
     (set) => ({
       steps: [],
-      otherSteps: new Map(),
+      topDay: null,
+      bottomDay: null,
       loading: false,
       error: null,
       fetchSteps: async (user: User) => {
@@ -29,7 +32,12 @@ export const useUserStepsStore = create<UserStepsState>()(
           }
 
           if (steps) {
-            set({ steps });
+            const sortedSteps = steps.toSorted((a, b) => b.steps - a.steps);
+
+            const topDay = sortedSteps[0];
+            const bottomDay = sortedSteps[steps.length - 1];
+
+            set({ steps, topDay, bottomDay });
           }
         } catch (err) {
           set({ error: 'Something went wrong when fetching your steps...' });

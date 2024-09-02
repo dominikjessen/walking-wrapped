@@ -12,6 +12,7 @@ import { useLeaderboardStore } from '@/stores/leaderboardStore';
 import { useUserProfileStore } from '@/stores/userProfileStore';
 import WalkingBuddySlide from '../slides/WalkingBuddySlide';
 import { useWalkingBuddiesStore } from '@/stores/walkingBuddiesStore';
+import TopBottomSlide from '../slides/TopBottomSlide';
 
 export interface WrappedSlideshowProps extends ComponentProps<'div'> {
   user: User;
@@ -53,7 +54,7 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
 
   // Slide management
 
-  const slides = [TotalStepsSlide, StepsGraphSlide, LeaderboardsSlide, WalkingBuddySlide, FinalSlide];
+  const slides = [TotalStepsSlide, StepsGraphSlide, TopBottomSlide, LeaderboardsSlide, WalkingBuddySlide, FinalSlide];
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
