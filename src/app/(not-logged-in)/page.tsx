@@ -14,11 +14,13 @@ export default async function Home() {
     return redirect('/login');
   }
 
+  const { data: profile } = await supabase.from('profiles').select().eq('id', user.id).limit(1).single();
+
   return (
-    <main className="min-h-screen flex flex-col gap-4 items-center justify-center p-12 w-1/3 mx-auto">
+    <main className="min-h-screen flex flex-col gap-4 items-center justify-center p-12 w-full md:w-1/3 mx-auto">
       <div className="flex flex-col gap-4">
         <span className="text-7xl animate-wave origin-[70%_70%] w-fit">👋🏻</span>
-        <p className="text-4xl font-bold">Hey {user.user_metadata.name},</p>
+        <p className="text-4xl font-bold">Hey {profile?.username},</p>
         <p className="text-2xl">are you ready to find out how busy your feet were this month?</p>
       </div>
 
