@@ -6,9 +6,10 @@ import { useUserProfileStore } from '@/stores/userProfileStore';
 interface LeaderboardProps extends ComponentProps<'div'> {
   leaderboard: LeaderboardEntry;
   scrollable?: boolean;
+  fullSize?: boolean;
 }
 
-export default function Leaderboard({ leaderboard, scrollable = false, className }: LeaderboardProps) {
+export default function Leaderboard({ leaderboard, scrollable = false, fullSize = false, className }: LeaderboardProps) {
   const { profile } = useUserProfileStore();
 
   return (
@@ -18,7 +19,7 @@ export default function Leaderboard({ leaderboard, scrollable = false, className
         <div>-</div>
         <div>{formatDate(leaderboard.end_date)}</div>
       </div>
-      <ul className={`max-h-28 ${scrollable ? 'overflow-y-auto' : 'overflow-y-hidden'}`}>
+      <ul className={cn('max-h-44', scrollable ? 'overflow-y-auto' : 'overflow-y-hidden', fullSize && 'max-h-none')}>
         {leaderboard.ranking.map((entry) => (
           <li key={entry.user_id} className={cn('grid grid-cols-3 py-2 items-center', entry.user_id === profile?.id && 'bg-green-200')}>
             <span className="text-2xl font-bold">{entry.rank}</span>

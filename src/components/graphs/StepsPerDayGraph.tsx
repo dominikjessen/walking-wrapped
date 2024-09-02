@@ -4,7 +4,8 @@ import { useUserStepsStore } from '@/stores/userStepsStore';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { formatDate, formatNumber } from '@/lib/utils';
+import { cn, formatDate, formatNumber } from '@/lib/utils';
+import { ComponentProps } from 'react';
 
 const chartConfig = {
   desktop: {
@@ -13,11 +14,11 @@ const chartConfig = {
   }
 } satisfies ChartConfig;
 
-export default function StepsPerDayGraph() {
+export default function StepsPerDayGraph({ className }: ComponentProps<'div'>) {
   const { steps } = useUserStepsStore();
 
   return (
-    <ChartContainer config={chartConfig} className={`min-h-[320px] w-full px-1 py-4 bg-white rounded-xl`}>
+    <ChartContainer config={chartConfig} className={cn('min-h-[320px] w-full px-1 py-4 bg-white rounded-xl', className)}>
       <LineChart accessibilityLayer data={steps}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="date" tickFormatter={(value) => formatDate(value)} />
