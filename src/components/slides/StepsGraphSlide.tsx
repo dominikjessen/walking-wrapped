@@ -20,7 +20,7 @@ export default function AverageStepsSlide() {
       exit={{ opacity: 0 }}
       className="flex flex-col gap-8 items-center justify-center bg-teal-100 h-screen overflow-hidden w-screen px-8"
     >
-      <h2>You want the day-by-day play-by-play? Here you go:</h2>
+      <h2>You want the day-by-day for your steps? Coming right up.</h2>
 
       <StepsPerDayGraph />
 
@@ -30,13 +30,13 @@ export default function AverageStepsSlide() {
         </h2>
         <div className="flex gap-2 items-center">
           <div>
-            Which puts you in the <span className="font-bold">{humanPercentile}th</span> percentile of all humans...
+            Did you know this puts you in the <span className="font-bold">{humanPercentile}th</span> percentile of all humans...
           </div>
           <div className="text-4xl">🚶</div>
         </div>
         <div className="flex gap-2 items-center justify-between">
           <div>
-            ...and the <span className="font-bold">{dogPercentile}th</span> percentile for dogs.
+            ...but only the <span className="font-bold">{dogPercentile}th</span> percentile for dogs.
           </div>
           <div className="text-4xl">🐕</div>
         </div>

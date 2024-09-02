@@ -28,7 +28,13 @@ export default function WalkingBuddySlide() {
           <div>
             There were <span className="font-bold">{topBuddies?.days}</span> days when you were closest to them in steps.
           </div>
-          <div>So how many of those walks did you go on together? 👀</div>
+          {topBuddies!.people.length > 2 ? (
+            <div>Looks like you were quite popular this month, huh?</div>
+          ) : topBuddies!.people.length > 1 ? (
+            <div>Guess you couldn't decide who to pick. Triangles are a nice shape anyway.</div>
+          ) : (
+            <div>So how many of those walks did two you go on together then? 👀</div>
+          )}
         </div>
       </div>
     </motion.div>

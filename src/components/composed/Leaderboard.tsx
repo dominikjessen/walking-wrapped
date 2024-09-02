@@ -20,7 +20,7 @@ export default function Leaderboard({ leaderboard, scrollable = false, className
       </div>
       <ul className={`max-h-28 ${scrollable ? 'overflow-y-auto' : 'overflow-y-hidden'}`}>
         {leaderboard.ranking.map((entry) => (
-          <li className={cn('grid grid-cols-3 py-2 items-center', entry.user_id === profile?.id && 'bg-green-200')}>
+          <li key={entry.user_id} className={cn('grid grid-cols-3 py-2 items-center', entry.user_id === profile?.id && 'bg-green-200')}>
             <span className="text-2xl font-bold">{entry.rank}</span>
             <span className="font-bold">{entry.username}</span>
             <span className="ml-auto">{formatNumber(entry.total_steps, 'standard', 0)}</span>
