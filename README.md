@@ -7,9 +7,9 @@
 # General
 
 [] Check mobile & desktop
-[] Make those stat tables
+[x] Make those stat tables
 [x] Make walking-buddy table per day
-[] Get both of those into userStepsStore
+[x] Get both of those into userStepsStore
 
 # Slides & stats needed
 
@@ -20,8 +20,8 @@
 [x] Step graph + average - maybe how much % more/less that is than world average?
 -- steps data, constant for world steps
 -- dog and human percentiles
-[] Best and worst day - and what position that is compared to everyone
--- top day, worst day, all days ranked (xth highest, yth lowest (count from bottom))
+[x] Best and worst day
+-- top day, worst day
 [x] Leaderboards slide
 -- All leaderboards per week with highlight for your own position
 -- Maybe even scroll to your position for each?
