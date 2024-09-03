@@ -98,9 +98,14 @@ export default function TotalStepsSlide() {
       </div>
 
       {showFunFacts ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-4 w-full mt-12">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="flex flex-col gap-4 w-full mt-12 text-center"
+        >
           <div>In that time you could've also...</div>
-          <div className="flex gap-4 w-full overflow-x-auto">
+          <div className="flex gap-4 w-full overflow-x-auto xl:justify-center">
             {funFacts.map((fact, index) => (
               <motion.div
                 key={index}
