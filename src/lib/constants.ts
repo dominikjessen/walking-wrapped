@@ -1,5 +1,5 @@
 // Animations
-export const COUNT_ANIMATION_DURATION = 3;
+export const COUNT_ANIMATION_DURATION = 2;
 export const TEXT_REVEAL_ANIMATION_DURATION = 3000;
 
 // Steps conversions

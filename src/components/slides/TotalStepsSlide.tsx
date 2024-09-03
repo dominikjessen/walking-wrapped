@@ -5,7 +5,8 @@ import {
   SECONDS_PER_TEETH_BRUSHING,
   SECONDS_TO_BOIL_LITER_OF_WATER,
   STEPS_PER_KM,
-  STEPS_PER_SECOND
+  STEPS_PER_SECOND,
+  TEXT_REVEAL_ANIMATION_DURATION
 } from '@/lib/constants';
 import { formatNumber, formatSecondsToHoursMinSecs } from '@/lib/utils';
 import { useUserStepsStore } from '@/stores/userStepsStore';
@@ -35,9 +36,9 @@ export default function TotalStepsSlide() {
     });
 
     controls.then(() => {
-      setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + 4000);
-      setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + 6000);
-      setTimeout(() => setShowFunFacts(true), COUNT_ANIMATION_DURATION + 8000);
+      setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 1.5);
+      setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 2.5);
+      setTimeout(() => setShowFunFacts(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3.5);
     });
 
     return controls.stop;
@@ -51,17 +52,17 @@ export default function TotalStepsSlide() {
   // Fun facts
   const funFacts: FunFact[] = [
     {
-      topText: 'Spent',
+      topText: 'spent',
       figureText: timeSpent.split(' ')[0],
       bottomText: 'petting 🐈s'
     },
     {
-      topText: 'Boiled',
+      topText: 'boiled',
       figureText: `${formatNumber(secondsStepped / SECONDS_TO_BOIL_LITER_OF_WATER, 'standard', 0)}l`,
       bottomText: 'of water'
     },
     {
-      topText: 'Brushed your teeth',
+      topText: 'brushed your teeth',
       figureText: formatNumber(secondsStepped / SECONDS_PER_TEETH_BRUSHING, 'standard', 0),
       bottomText: 'times'
     }
@@ -82,14 +83,14 @@ export default function TotalStepsSlide() {
         </div>
 
         {showKm ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2 items-center">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
             <div>Which means you walked</div>
             <div className="text-4xl font-bol">~{totalKm} km</div>
           </motion.div>
         ) : null}
 
         {showTime ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-2 items-center">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
             <div>And it probably took you about</div>
             <div className="text-4xl font-bol">{timeSpent}</div>
           </motion.div>
@@ -97,14 +98,14 @@ export default function TotalStepsSlide() {
       </div>
 
       {showFunFacts ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-4 w-full mt-12">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-4 w-full mt-12">
           <div>In that time you could've also...</div>
           <div className="flex gap-4 w-full overflow-x-auto">
             {funFacts.map((fact, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: index * 0.2 } }}
+                animate={{ opacity: 1, transition: { delay: index * 0.75, duration: 0.5 } }}
                 className="min-w-52 min-h-52"
               >
                 <FunFactCard fact={fact} />
