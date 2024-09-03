@@ -2,24 +2,18 @@ import { motion, RepeatType } from 'framer-motion';
 import { useWalkingBuddiesStore } from '@/stores/walkingBuddiesStore';
 import { useEffect, useState } from 'react';
 import { generatePoissonDiskPositions } from '@/lib/utils';
+import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
 
 export default function WalkingBuddySlide() {
   const { topBuddies } = useWalkingBuddiesStore();
 
+  // Animation vs content
   const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 6000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const heartVariants = {
     initial: { opacity: 0, y: 20 },
     animate: {
-      opacity: [0, 1, 0],
+      opacity: [0.25, 1, 0.25],
       y: [20, -20, 20],
       transition: {
         duration: 3,
@@ -32,6 +26,19 @@ export default function WalkingBuddySlide() {
 
   const heartPositions = generatePoissonDiskPositions(95, 105, 20, 20, 100);
 
+  // Staggered content reveal
+  const [showBuddy, setShowBuddy] = useState(false);
+  const [showMainText, setShowMainText] = useState(false);
+  const [showSubText, setShowSubText] = useState(false);
+
+  // Animation control
+  useEffect(() => {
+    setTimeout(() => setShowContent(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
+    setTimeout(() => setShowBuddy(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
+    setTimeout(() => setShowMainText(true), TEXT_REVEAL_ANIMATION_DURATION * 4.5);
+    setTimeout(() => setShowSubText(true), TEXT_REVEAL_ANIMATION_DURATION * 6);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -40,33 +47,66 @@ export default function WalkingBuddySlide() {
       className="flex flex-col items-center justify-center h-screen bg-sky-100 overflow-hidden w-screen px-8"
     >
       {showContent ? (
-        <div className="w-full flex flex-col gap-4 items-center">
-          <div className="flex gap-2">
-            {topBuddies?.people.map((name) => (
-              <div key={name} className="font-bold text-2xl">
-                {name}
+        <div className="w-full flex flex-col gap-12 items-center text-center">
+          {showBuddy ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="w-full flex flex-col gap-4 items-center"
+            >
+              <div className="flex gap-2">
+                {topBuddies?.people.map((name, i) => (
+                  <div key={name} className="font-bold text-4xl">
+                    {name}
+                    {i < topBuddies.people.length - 1 ? ', ' : null}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+              <div>
+                <span>{topBuddies!.people.length > 1 ? 'were' : 'was'}</span> your August walking{' '}
+                {topBuddies!.people.length > 1 ? 'buddies' : 'buddy'}.
+              </div>
+            </motion.div>
+          ) : null}
 
-          <div>
-            <span>{topBuddies!.people.length > 1 ? 'were' : 'was'}</span> your August walking {topBuddies!.people.length > 1 ? 'buddies' : 'buddy'}.
-          </div>
-          <div className="flex flex-col gap-4">
-            <div>
-              There were <span className="font-bold">{topBuddies?.days}</span> days when you were closest to them in steps.
-            </div>
-            {topBuddies!.people.length > 2 ? (
-              <div>Looks like you were quite popular this month, huh?</div>
-            ) : topBuddies!.people.length > 1 ? (
-              <div>Guess you couldn't decide who to pick. Triangles are a nice shape anyway.</div>
-            ) : (
-              <div>So how many of those walks did two you go on together then? 👀</div>
-            )}
-          </div>
+          {showMainText ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="w-full flex flex-col gap-4 items-center"
+            >
+              <div>
+                There were <span className="font-bold">{topBuddies?.days}</span> days when you were closest to them in steps.
+              </div>
+            </motion.div>
+          ) : null}
+
+          {showSubText ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="w-full flex flex-col gap-4 items-center"
+            >
+              {topBuddies!.people.length > 2 ? (
+                <div>Looks like you were quite popular this month, huh?</div>
+              ) : topBuddies!.people.length > 1 ? (
+                <div>Guess you couldn't decide who to pick. Triangles are a nice shape anyway.</div>
+              ) : (
+                <div>So how many of those walks did two you go on together then? 👀</div>
+              )}
+            </motion.div>
+          ) : null}
         </div>
       ) : (
-        <div className="text-4xl font-bold text-center size-full relative">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="text-4xl font-bold text-center size-full relative"
+        >
           {heartPositions.map((position, i) => (
             <motion.div
               key={i}
@@ -88,7 +128,7 @@ export default function WalkingBuddySlide() {
               </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </motion.div>
   );
