@@ -1,9 +1,25 @@
 import { useLeaderboardStore } from '@/stores/leaderboardStore';
 import { motion } from 'framer-motion';
 import Leaderboard from '../composed/Leaderboard';
+import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
+import { useState, useEffect } from 'react';
 
 export default function LeaderboardsSlide() {
   const { weeklyLeaderboards } = useLeaderboardStore();
+
+  // Animation vs content
+  // TODO: Add animation
+  const [showContent, setShowContent] = useState(true);
+
+  const [showTitle, setShowTitle] = useState(false);
+  const [showLeaderboards, setShowLeaderboards] = useState(false);
+
+  // Animation control
+  useEffect(() => {
+    // setTimeout(() => setShowContent(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
+    setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
+    setTimeout(() => setShowLeaderboards(true), TEXT_REVEAL_ANIMATION_DURATION * 1);
+  }, []);
 
   return (
     <motion.div
@@ -12,14 +28,28 @@ export default function LeaderboardsSlide() {
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center h-screen bg-orange-100 overflow-hidden w-screen px-8"
     >
-      <div className="w-full flex flex-col gap-4">
-        <h2 className="text-2xl">Now, shall we see how everyone else's weeks went?</h2>
-        <p>Here's the week-by-week rankings:</p>
-        <div className="flex gap-4 overflow-x-auto">
-          {weeklyLeaderboards.map((leaderboard) => (
-            <Leaderboard key={`${leaderboard.start_date}-${leaderboard.end_date}`} leaderboard={leaderboard} scrollable className="min-w-[320px]" />
-          ))}
-        </div>
+      <div className="w-full flex flex-col gap-24">
+        {showTitle ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full text-center">
+            <div className="text-2xl">Now, shall we see how everyone else's weeks went?</div>
+          </motion.div>
+        ) : null}
+
+        {showLeaderboards ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
+            <div className="flex gap-4 overflow-x-auto">
+              {weeklyLeaderboards.map((leaderboard, i) => (
+                <motion.div
+                  key={`${leaderboard.start_date}-${leaderboard.end_date}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { delay: i * 0.75, duration: 0.5 } }}
+                >
+                  <Leaderboard leaderboard={leaderboard} scrollable className="min-w-[320px]" />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        ) : null}
       </div>
     </motion.div>
   );

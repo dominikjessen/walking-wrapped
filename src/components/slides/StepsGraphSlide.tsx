@@ -32,7 +32,6 @@ export default function AverageStepsSlide() {
     setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
     setTimeout(() => setShowGraph(true), TEXT_REVEAL_ANIMATION_DURATION * 0.75);
     setTimeout(() => setShowAverage(true), TEXT_REVEAL_ANIMATION_DURATION * 2);
-
     setTimeout(() => setShowHuman(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
     setTimeout(() => setShowDog(true), TEXT_REVEAL_ANIMATION_DURATION * 3.75);
   }, []);
