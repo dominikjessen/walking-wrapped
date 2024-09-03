@@ -47,7 +47,7 @@ export default function WalkingBuddySlide() {
       className="flex flex-col items-center justify-center h-screen bg-sky-100 overflow-hidden w-screen px-8"
     >
       {showContent ? (
-        <div className="w-full flex flex-col gap-12 items-center text-center">
+        <div className="w-full flex flex-col gap-24 items-center text-center text-2xl">
           {showBuddy ? (
             <motion.div
               initial={{ opacity: 0 }}
@@ -57,7 +57,7 @@ export default function WalkingBuddySlide() {
             >
               <div className="flex gap-2">
                 {topBuddies?.people.map((name, i) => (
-                  <div key={name} className="font-bold text-4xl">
+                  <div key={name} className="font-bold text-8xl">
                     {name}
                     {i < topBuddies.people.length - 1 ? ', ' : null}
                   </div>
@@ -78,7 +78,7 @@ export default function WalkingBuddySlide() {
               className="w-full flex flex-col gap-4 items-center"
             >
               <div>
-                There were <span className="font-bold">{topBuddies?.days}</span> days when you were closest to them in steps.
+                There were <span className="font-bold">{topBuddies?.days}</span> days when they were your closest step partner.
               </div>
             </motion.div>
           ) : null}
@@ -95,7 +95,7 @@ export default function WalkingBuddySlide() {
               ) : topBuddies!.people.length > 1 ? (
                 <div>Guess you couldn't decide who to pick. Triangles are a nice shape anyway.</div>
               ) : (
-                <div>So how many of those walks did two you go on together then? 👀</div>
+                <div>So how many of those walks did you two go on together then? 👀</div>
               )}
             </motion.div>
           ) : null}
@@ -122,7 +122,7 @@ export default function WalkingBuddySlide() {
           ))}
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-sky-100 py-8 px-4">
+            <div className="bg-sky-100 py-8 px-4 text-8xl">
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 2 }}>
                 Love is in the air
               </motion.div>

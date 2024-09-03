@@ -58,8 +58,7 @@ export default function TopBottomSlide() {
           {showTopText ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
               <div>
-                You did <span className="font-bold">{formatNumber(topDay!.steps, 'standard', 0)}</span> steps that day - the most you got all month
-                💪.
+                You did <span className="font-bold">{formatNumber(topDay!.steps, 'standard', 0)}</span> steps that day - the most you got all month 💪
               </div>
             </motion.div>
           ) : null}
@@ -84,7 +83,7 @@ export default function TopBottomSlide() {
 
           {showBottomText ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
-              <div>But hey, I bet you had a great day regardless.</div>
+              <div>But hey, I bet you had a great day just rotting away on the couch regardless.</div>
             </motion.div>
           ) : null}
         </div>
