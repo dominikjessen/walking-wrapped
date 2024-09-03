@@ -28,7 +28,7 @@ export default function LeaderboardsSlide() {
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center h-screen bg-orange-100 overflow-hidden w-screen px-8"
     >
-      <div className="w-full flex flex-col gap-24">
+      <div className="w-full flex flex-col gap-24 mx-auto">
         {showTitle ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full text-center">
             <div className="text-2xl">Now, shall we see how everyone else's weeks went?</div>
@@ -37,7 +37,7 @@ export default function LeaderboardsSlide() {
 
         {showLeaderboards ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
-            <div className="flex gap-4 overflow-x-auto">
+            <div className="flex gap-4 overflow-x-auto xl:justify-center">
               {weeklyLeaderboards.map((leaderboard, i) => (
                 <motion.div
                   key={`${leaderboard.start_date}-${leaderboard.end_date}`}
