@@ -70,7 +70,7 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
 
   return (
     <div className="h-screen flex flex-col">
-      {loading ? <div>Loading wrapped...</div> : <SlideComponent />}
+      {loading ? <div className="text-8xl self-center">🏃...</div> : <SlideComponent />}
       <div className="flex justify-between gap-4 absolute bottom-2 right-2">
         <Button onClick={goToPrevSlide} disabled={currentSlide === 0}>
           Prev

@@ -1,6 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 
 export default async function AuthButton() {
@@ -15,7 +14,12 @@ export default async function AuthButton() {
 
     const supabase = createClient();
     await supabase.auth.signOut();
-    return redirect('/login');
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: '/'
+      }
+    });
   };
 
   return user ? (
