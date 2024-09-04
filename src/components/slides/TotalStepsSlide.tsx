@@ -79,8 +79,8 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center h-[100dvh] bg-pink-100 overflow-hidden w-screen px-8"
     >
-      <div className="flex flex-col gap-12 items-center">
-        <div className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col gap-6 lg:gap-12 items-center">
+        <div className="flex flex-col gap-2 lg:gap-4 items-center">
           <p className="">In total you did</p>
           <motion.span className="font-bold text-6xl">{formatted}</motion.span>
           <p>steps this month!</p>
@@ -89,14 +89,14 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
         {showKm ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
             <div>Which means you walked</div>
-            <div className="text-4xl font-bol">~{totalKm} km</div>
+            <div className="text-4xl font-bold">~{totalKm} km</div>
           </motion.div>
         ) : null}
 
         {showTime ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
             <div>And it probably took you about</div>
-            <div className="text-4xl font-bol">{timeSpent}</div>
+            <div className="text-4xl font-bold">{timeSpent}</div>
           </motion.div>
         ) : null}
       </div>
@@ -106,16 +106,16 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="flex flex-col gap-4 w-full mt-12 text-center"
+          className="flex flex-col gap-2 lg:gap-4 w-full mt-4 lg:mt-12 text-center"
         >
           <div>In that time you could've also...</div>
-          <div className="flex gap-4 w-full overflow-x-auto xl:justify-center">
+          <div className="flex gap-2 lg:gap-4 w-full overflow-x-auto xl:justify-center">
             {funFacts.map((fact, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: { delay: index * 0.75, duration: 0.5 } }}
-                className="min-w-52 min-h-52"
+                className="min-w-44 lg:min-w-52 min-h-44 lg:min-h-52"
               >
                 <FunFactCard fact={fact} />
               </motion.div>

@@ -24,8 +24,10 @@ export default async function Home() {
         <p className="text-2xl">are you ready to find out how busy your feet were this month?</p>
       </div>
 
-      <Link href="/wrapped" className="w-full mt-12">
-        <Button className="w-3/4 text-xl">Start recap</Button>
+      <Link href="/wrapped" className="w-full mt-4">
+        <Button className="text-lg" size="lg">
+          Start recap
+        </Button>
       </Link>
     </main>
   );
