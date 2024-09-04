@@ -8,8 +8,9 @@ import { Button } from '../ui/Button';
 import { useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import { cn } from '@/lib/utils';
+import { SlideProps } from '@/types';
 
-export default function FinalSlide() {
+export default function FinalSlide({ onAnimationComplete }: SlideProps) {
   const { steps } = useUserStepsStore();
   const { monthlyLeaderboard } = useLeaderboardStore();
 
@@ -39,7 +40,7 @@ export default function FinalSlide() {
       } finally {
         setIsDownloadingImage(false);
       }
-    }, 0);
+    }, 10);
   }
 
   return (

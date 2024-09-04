@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
+import { ComponentProps, useCallback, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import TotalStepsSlide from '@/components/slides/TotalStepsSlide';
 import StepsGraphSlide from '@/components/slides/StepsGraphSlide';
@@ -53,9 +53,8 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   }, [user, fetchWalkingBuddies]);
 
   // Slide management
-
   const slides = [TotalStepsSlide, StepsGraphSlide, TopBottomSlide, LeaderboardsSlide, WalkingBuddySlide, FinalSlide];
-
+  const [navigationDisabled, setNavigationDisabled] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const goToNextSlide = () => {
@@ -68,14 +67,22 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
 
   const SlideComponent = slides[currentSlide];
 
+  useEffect(() => {
+    setNavigationDisabled(true);
+  }, [currentSlide]);
+
+  const onSlideAnimationComplete = useCallback(() => {
+    setNavigationDisabled(false);
+  }, []);
+
   return (
     <div className="h-screen flex flex-col">
-      {loading ? <div className="text-8xl self-center">🏃...</div> : <SlideComponent />}
+      {loading ? <div className="text-8xl self-center">🏃...</div> : <SlideComponent onAnimationComplete={onSlideAnimationComplete} />}
       <div className="flex justify-between gap-4 absolute bottom-4 right-4">
-        <Button onClick={goToPrevSlide} disabled={currentSlide === 0}>
+        <Button onClick={goToPrevSlide} disabled={currentSlide === 0 || navigationDisabled}>
           Prev
         </Button>
-        <Button onClick={goToNextSlide} disabled={currentSlide === slides.length - 1}>
+        <Button onClick={goToNextSlide} disabled={currentSlide === slides.length - 1 || navigationDisabled}>
           Next
         </Button>
       </div>

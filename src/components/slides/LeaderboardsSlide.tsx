@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import Leaderboard from '../composed/Leaderboard';
 import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
 import { useState, useEffect } from 'react';
+import { SlideProps } from '@/types';
 
-export default function LeaderboardsSlide() {
+export default function LeaderboardsSlide({ onAnimationComplete }: SlideProps) {
   const { weeklyLeaderboards } = useLeaderboardStore();
 
   // Animation vs content
@@ -18,7 +19,10 @@ export default function LeaderboardsSlide() {
   useEffect(() => {
     // setTimeout(() => setShowContent(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
     setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
-    setTimeout(() => setShowLeaderboards(true), TEXT_REVEAL_ANIMATION_DURATION * 1);
+    setTimeout(() => {
+      setShowLeaderboards(true);
+      onAnimationComplete();
+    }, TEXT_REVEAL_ANIMATION_DURATION * 1);
   }, []);
 
   return (

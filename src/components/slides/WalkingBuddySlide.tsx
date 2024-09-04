@@ -3,8 +3,9 @@ import { useWalkingBuddiesStore } from '@/stores/walkingBuddiesStore';
 import { useEffect, useState } from 'react';
 import { generatePoissonDiskPositions } from '@/lib/utils';
 import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
+import { SlideProps } from '@/types';
 
-export default function WalkingBuddySlide() {
+export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
   const { topBuddies } = useWalkingBuddiesStore();
 
   // Animation vs content
@@ -36,7 +37,10 @@ export default function WalkingBuddySlide() {
     setTimeout(() => setShowContent(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
     setTimeout(() => setShowBuddy(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
     setTimeout(() => setShowMainText(true), TEXT_REVEAL_ANIMATION_DURATION * 4.5);
-    setTimeout(() => setShowSubText(true), TEXT_REVEAL_ANIMATION_DURATION * 6);
+    setTimeout(() => {
+      setShowSubText(true);
+      onAnimationComplete();
+    }, TEXT_REVEAL_ANIMATION_DURATION * 6);
   }, []);
 
   return (

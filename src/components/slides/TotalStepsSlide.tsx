@@ -13,8 +13,9 @@ import { useUserStepsStore } from '@/stores/userStepsStore';
 import { animate, easeIn, motion, useMotionValue, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import FunFactCard from '../composed/FunFactCard';
+import { FunFact, SlideProps } from '@/types';
 
-export default function TotalStepsSlide() {
+export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
   // Data from store
   const { steps } = useUserStepsStore();
   const totalSteps = steps.reduce((sum, step) => sum + step.steps, 0);
@@ -38,7 +39,10 @@ export default function TotalStepsSlide() {
     controls.then(() => {
       setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 1.5);
       setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 2.5);
-      setTimeout(() => setShowFunFacts(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3.5);
+      setTimeout(() => {
+        setShowFunFacts(true);
+        onAnimationComplete();
+      }, COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3.5);
     });
 
     return controls.stop;

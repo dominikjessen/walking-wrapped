@@ -3,8 +3,9 @@ import { useUserStepsStore } from '@/stores/userStepsStore';
 import { formatDate, formatNumber } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
+import { SlideProps } from '@/types';
 
-export default function TopBottomSlide() {
+export default function TopBottomSlide({ onAnimationComplete }: SlideProps) {
   const { topDay, bottomDay } = useUserStepsStore();
 
   // Animation vs content
@@ -29,7 +30,10 @@ export default function TopBottomSlide() {
 
     setTimeout(() => setShowBottomTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
     setTimeout(() => setShowBottomSubTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 3.75);
-    setTimeout(() => setShowBottomText(true), TEXT_REVEAL_ANIMATION_DURATION * 4.5);
+    setTimeout(() => {
+      setShowBottomText(true);
+      onAnimationComplete();
+    }, TEXT_REVEAL_ANIMATION_DURATION * 4.5);
   }, []);
 
   return (

@@ -5,8 +5,9 @@ import { calculateDogStepPercentile, calculateHumanStepPercentile } from '@/lib/
 import { formatNumber } from '@/lib/utils';
 import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
 import { useState, useEffect } from 'react';
+import { SlideProps } from '@/types';
 
-export default function AverageStepsSlide() {
+export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
   const { steps } = useUserStepsStore();
 
   const totalSteps = steps.reduce((acc, entry) => acc + entry.steps, 0);
@@ -33,7 +34,10 @@ export default function AverageStepsSlide() {
     setTimeout(() => setShowGraph(true), TEXT_REVEAL_ANIMATION_DURATION * 0.75);
     setTimeout(() => setShowAverage(true), TEXT_REVEAL_ANIMATION_DURATION * 2);
     setTimeout(() => setShowHuman(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
-    setTimeout(() => setShowDog(true), TEXT_REVEAL_ANIMATION_DURATION * 3.75);
+    setTimeout(() => {
+      setShowDog(true);
+      onAnimationComplete();
+    }, TEXT_REVEAL_ANIMATION_DURATION * 3.75);
   }, []);
 
   return (

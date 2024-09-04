@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { FunFact } from '@/types';
 import { ComponentProps } from 'react';
 
 export interface FunFactCardProps extends ComponentProps<'div'> {
