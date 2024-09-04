@@ -50,7 +50,7 @@ export default function AverageStepsSlide() {
       ) : null}
 
       {showGraph ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="lg:w-1/3">
           <StepsPerDayGraph />
         </motion.div>
       ) : null}
