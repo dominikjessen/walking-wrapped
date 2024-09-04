@@ -23,7 +23,7 @@ export default function MagicLink({ searchParams }: { searchParams: { message: s
   };
 
   return (
-    <div className="flex flex-col w-full sm:max-w-md justify-center items-center gap-2 m-auto h-screen">
+    <div className="flex flex-col w-full sm:max-w-md justify-center items-center gap-2 m-auto h-[100dvh]">
       <form className="flex flex-col w-full justify-center gap-2 text-foreground bg-white p-10 rounded-xl">
         <h1 className="text-xl font-bold mb-4">Sign in with a magic link</h1>
         <label className="text-md" htmlFor="email">

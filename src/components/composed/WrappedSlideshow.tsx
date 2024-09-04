@@ -76,7 +76,7 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex flex-col">
       {loading ? <div className="text-8xl self-center">🏃...</div> : <SlideComponent onAnimationComplete={onSlideAnimationComplete} />}
       <div className="flex justify-between gap-4 absolute bottom-4 right-4">
         <Button onClick={goToPrevSlide} disabled={currentSlide === 0 || navigationDisabled}>

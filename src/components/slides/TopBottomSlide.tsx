@@ -41,7 +41,7 @@ export default function TopBottomSlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col gap-8 items-center justify-center bg-teal-100 h-screen overflow-hidden w-screen px-8 text-center"
+      className="flex flex-col gap-8 items-center justify-center bg-teal-100 h-[100dvh] overflow-hidden w-screen px-8 text-center"
     >
       <div className="flex flex-col gap-12 justify-evenly">
         <div className="flex flex-col gap-6">

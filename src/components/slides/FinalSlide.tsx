@@ -43,12 +43,15 @@ export default function FinalSlide({ onAnimationComplete }: SlideProps) {
     }, 10);
   }
 
+  // No animation here yet
+  onAnimationComplete();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center h-screen bg-cyan-100 w-screen px-8 lg:overflow-y-auto"
+      className="flex flex-col items-center justify-center bg-cyan-100 h-[100dvh] w-screen px-8 lg:overflow-y-auto"
     >
       <div className="flex flex-col items-center gap-4 w-full">
         <div ref={imageRootRef} className={cn('flex flex-col items-center gap-4 w-full', isDownloadingImage && 'px-4 py-6')}>
@@ -57,7 +60,7 @@ export default function FinalSlide({ onAnimationComplete }: SlideProps) {
             <KPI title="Total" value={totalSteps} />
             <KPI title="Avg" value={averageSteps} />
           </div>
-          <StepsPerDayGraph className="min-h-0 max-h-[420px] lg:w-1/3" />
+          <StepsPerDayGraph className="min-h-0 lg:w-1/3 max-h-full" />
           <div className="lg:grid grid-cols-2 flex flex-col gap-4 w-full">
             <div className="hidden lg:flex flex-col gap-4 justify-center w-1/2 self-center">
               <KPI title="Total" value={totalSteps} />

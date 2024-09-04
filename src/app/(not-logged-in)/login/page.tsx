@@ -23,7 +23,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
   };
 
   return (
-    <div className="flex flex-col w-full sm:max-w-md justify-center items-center gap-2 m-auto h-screen">
+    <div className="flex flex-col w-full sm:max-w-md justify-center items-center gap-2 px-8 m-auto h-[100dvh]">
       <form className="flex flex-col w-full justify-center gap-2 text-foreground bg-white p-10 rounded-xl">
         <h1 className="text-xl font-bold mb-4">Sign in</h1>
         <label className="text-md" htmlFor="email">

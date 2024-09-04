@@ -45,7 +45,7 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col gap-8 items-center justify-center bg-teal-100 h-screen overflow-hidden w-screen px-8"
+      className="flex flex-col gap-8 items-center justify-center bg-teal-100 h-[100dvh] overflow-hidden w-screen px-8"
     >
       {showTitle ? (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
@@ -54,7 +54,7 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
       ) : null}
 
       {showGraph ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="lg:w-1/3">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="lg:w-1/3 max-w-full">
           <StepsPerDayGraph />
         </motion.div>
       ) : null}

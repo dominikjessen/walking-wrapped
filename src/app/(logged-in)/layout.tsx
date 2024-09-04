@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn('h-screen w-screen overflow-hidden text-xl', font.className)}>
+      <body className={cn('h-[100dvh] w-[100dvw] overflow-hidden text-xl', font.className)}>
         <nav className="absolute right-4 top-4 z-50">
           <AuthButton />
         </nav>

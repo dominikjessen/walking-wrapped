@@ -77,7 +77,7 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center h-screen bg-pink-100 overflow-hidden w-screen px-8"
+      className="flex flex-col items-center justify-center h-[100dvh] bg-pink-100 overflow-hidden w-screen px-8"
     >
       <div className="flex flex-col gap-12 items-center">
         <div className="flex flex-col gap-4 items-center">

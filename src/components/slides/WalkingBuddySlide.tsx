@@ -48,7 +48,7 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center h-screen bg-sky-100 overflow-hidden w-screen px-8"
+      className="flex flex-col items-center justify-center h-[100dvh] bg-sky-100 overflow-hidden w-screen px-8"
     >
       {showContent ? (
         <div className="w-full flex flex-col gap-24 items-center text-center text-2xl">
