@@ -32,9 +32,18 @@
 
 # Animations and design
 
-[] Start slideshow
-[] Total steps
+[x] Start slideshow
+[x] Total steps
 [] Step graph + average
 [] Best and worst day
-[] Leaderboards
-[] Walking buddy
+[x] Leaderboards
+[x] Walking buddy
+
+# Other todo
+
+[] Total slide - mobile cards are ugly af
+[] Graph slide - graph is too wide (check final for correct html)
+[] Leaderboard - make gaps smaller for mobile
+[] Final slide - remove image button for now
+[] Update emails
+[] Get final data
