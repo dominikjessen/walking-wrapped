@@ -79,7 +79,7 @@ export default function FinalSlide({ onAnimationComplete }: SlideProps) {
             </div>
           </div>
         </div>
-        <Button onClick={saveSlideAsImage}>Save image</Button>
+        {/* <Button onClick={saveSlideAsImage}>Save image</Button> */}
       </div>
     </motion.div>
   );

@@ -34,7 +34,7 @@
 
 [x] Start slideshow
 [x] Total steps
-[] Step graph + average
+[x] Step graph + average
 [] Best and worst day
 [x] Leaderboards
 [x] Walking buddy
@@ -47,3 +47,4 @@
 [] Final slide - remove image button for now
 [] Update emails
 [] Get final data
+[] Check that control enabling is correctly done (can nest timeouts)
