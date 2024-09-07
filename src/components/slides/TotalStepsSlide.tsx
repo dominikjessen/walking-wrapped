@@ -14,8 +14,11 @@ import { animate, easeIn, motion, useMotionValue, useTransform } from 'framer-mo
 import { useEffect, useState } from 'react';
 import FunFactCard from '../composed/FunFactCard';
 import { FunFact, SlideProps } from '@/types';
+import { Footsteps } from '../animations/Footsteps';
 
 export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
+  const [showContent, setShowContent] = useState(false);
+
   // Data from store
   const { steps } = useUserStepsStore();
   const totalSteps = steps.reduce((sum, step) => sum + step.steps, 0);
@@ -30,22 +33,30 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const formatted = useTransform(rounded, (latest) => formatNumber(latest, 'standard', 0));
 
+  const numberOfFootsteps = 8;
+  const footStepAnimationDuration = 0.5;
+  const footStepDirectionChangeDelayConstant = 1;
+
   useEffect(() => {
-    const controls = animate(count, totalSteps, {
-      duration: COUNT_ANIMATION_DURATION,
-      ease: easeIn
-    });
+    setTimeout(() => {
+      setShowContent(true);
 
-    controls.then(() => {
-      setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 1.5);
-      setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 2.5);
-      setTimeout(() => {
-        setShowFunFacts(true);
-        onAnimationComplete();
-      }, COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3.5);
-    });
+      const controls = animate(count, totalSteps, {
+        duration: COUNT_ANIMATION_DURATION,
+        ease: easeIn
+      });
 
-    return controls.stop;
+      controls.then(() => {
+        setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 1.5);
+        setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 2.5);
+        setTimeout(() => {
+          setShowFunFacts(true);
+          onAnimationComplete();
+        }, COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3.5);
+      });
+
+      return controls.stop;
+    }, footStepDirectionChangeDelayConstant * 1000 + 2000 + numberOfFootsteps * footStepAnimationDuration * 1000 * 2);
   }, [count, totalSteps]);
 
   // constant values
@@ -79,50 +90,64 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center h-[100dvh] bg-pink-100 overflow-hidden w-screen px-8"
     >
-      <div className="flex flex-col gap-6 lg:gap-12 items-center">
-        <div className="flex flex-col gap-2 lg:gap-4 items-center">
-          <p className="">In total you did</p>
-          <motion.span className="font-bold text-6xl">{formatted}</motion.span>
-          <p>steps this month!</p>
-        </div>
+      {showContent ? (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <div className="flex flex-col gap-6 lg:gap-12 items-center">
+            <div className="flex flex-col gap-2 lg:gap-4 items-center">
+              <p className="">In total you did</p>
+              <motion.span className="font-bold text-6xl">{formatted}</motion.span>
+              <p>steps this month!</p>
+            </div>
 
-        {showKm ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
-            <div>Which means you walked</div>
-            <div className="text-4xl font-bold">~{totalKm} km</div>
-          </motion.div>
-        ) : null}
-
-        {showTime ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
-            <div>And it probably took you about</div>
-            <div className="text-4xl font-bold">{timeSpent}</div>
-          </motion.div>
-        ) : null}
-      </div>
-
-      {showFunFacts ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="flex flex-col gap-2 lg:gap-4 w-full mt-4 lg:mt-12 text-center"
-        >
-          <div>In that time you could've also...</div>
-          <div className="flex gap-2 lg:gap-4 w-full overflow-x-auto xl:justify-center">
-            {funFacts.map((fact, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: index * 0.75, duration: 0.5 } }}
-                className="min-w-44 lg:min-w-52 min-h-44 lg:min-h-52"
-              >
-                <FunFactCard fact={fact} />
+            {showKm ? (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
+                <div>Which means you walked</div>
+                <div className="text-4xl font-bold">~{totalKm} km</div>
               </motion.div>
-            ))}
+            ) : null}
+
+            {showTime ? (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex flex-col gap-2 items-center">
+                <div>And it probably took you about</div>
+                <div className="text-4xl font-bold">{timeSpent}</div>
+              </motion.div>
+            ) : null}
           </div>
+
+          {showFunFacts ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="flex flex-col gap-2 lg:gap-4 w-full mt-4 lg:mt-12 text-center"
+            >
+              <div>In that time you could've also...</div>
+              <div className="flex gap-2 lg:gap-4 w-full overflow-x-auto xl:justify-center">
+                {funFacts.map((fact, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { delay: index * 0.75, duration: 0.5 } }}
+                    className="min-w-44 lg:min-w-52 min-h-44 lg:min-h-52"
+                  >
+                    <FunFactCard fact={fact} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ) : null}
         </motion.div>
-      ) : null}
+      ) : (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
+          <Footsteps numberOfFootsteps={numberOfFootsteps} footstepAnimationDuration={footStepAnimationDuration} direction="right" startDelay={0} />
+          <Footsteps
+            numberOfFootsteps={numberOfFootsteps}
+            footstepAnimationDuration={footStepAnimationDuration}
+            direction="left"
+            startDelay={footStepDirectionChangeDelayConstant + footStepAnimationDuration * numberOfFootsteps}
+          />
+        </motion.div>
+      )}
     </motion.div>
   );
 }
