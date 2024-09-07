@@ -30,6 +30,13 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    --slide-top-bottom: 54 91% 86%;
+
+    --slide-leaderboard-one: 131 22% 29%;
+    --slide-leaderboard-two: 119 19% 42%;
+    --slide-leaderboard-three: 82 20% 62%;
+    --slide-leaderboard-final: 46 15% 83%;
   }
 
   .dark {

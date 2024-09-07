@@ -14,6 +14,13 @@ const config = {
     },
     extend: {
       colors: {
+        slide: {
+          'top-bottom': 'hsl(var(--slide-top-bottom))',
+          'leaderboard-one': 'hsl(var(--slide-leaderboard-one))',
+          'leaderboard-two': 'hsl(var(--slide-leaderboard-two))',
+          'leaderboard-three': 'hsl(var(--slide-leaderboard-three))',
+          'leaderboard-final': 'hsl(var(--slide-leaderboard-final))'
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -6,6 +6,7 @@ import { formatNumber } from '@/lib/utils';
 import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
 import { useState, useEffect } from 'react';
 import { SlideProps } from '@/types';
+import SineWave from '../animations/SineWave';
 
 export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
   const { steps } = useUserStepsStore();
@@ -17,8 +18,8 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
   const dogPercentile = calculateDogStepPercentile(averageSteps);
 
   // Animation vs content
-  // TODO: Add animation
-  const [showContent, setShowContent] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+  const sineGrowthDuration = 3;
 
   // Staggered content reveal
   const [showTitle, setShowTitle] = useState(false);
@@ -29,15 +30,19 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
 
   // Animation control
   useEffect(() => {
-    // setTimeout(() => setShowContent(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
-    setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
-    setTimeout(() => setShowGraph(true), TEXT_REVEAL_ANIMATION_DURATION * 0.75);
-    setTimeout(() => setShowAverage(true), TEXT_REVEAL_ANIMATION_DURATION * 2);
-    setTimeout(() => setShowHuman(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
     setTimeout(() => {
-      setShowDog(true);
-      onAnimationComplete();
-    }, TEXT_REVEAL_ANIMATION_DURATION * 3.75);
+      setShowContent(true);
+
+      // Stagger rest of content
+      setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
+      setTimeout(() => setShowGraph(true), TEXT_REVEAL_ANIMATION_DURATION * 0.75);
+      setTimeout(() => setShowAverage(true), TEXT_REVEAL_ANIMATION_DURATION * 2);
+      setTimeout(() => setShowHuman(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
+      setTimeout(() => {
+        setShowDog(true);
+        onAnimationComplete();
+      }, TEXT_REVEAL_ANIMATION_DURATION * 3.75);
+    }, sineGrowthDuration * 1000 * 2);
   }, []);
 
   return (
@@ -47,49 +52,93 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
       exit={{ opacity: 0 }}
       className="flex flex-col gap-4 lg:gap-8 items-center justify-center bg-teal-100 h-[100dvh] overflow-hidden w-screen px-8"
     >
-      {showTitle ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
-          <div className="text-center">You want the day-by-day of your steps? Coming right up.</div>
-        </motion.div>
-      ) : null}
+      {showContent ? (
+        <>
+          {showTitle ? (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
+              <div className="text-center">You want the day-by-day of your steps? Coming right up.</div>
+            </motion.div>
+          ) : null}
 
-      {showGraph ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-          <StepsPerDayGraph className="max-w-screen" />
-        </motion.div>
-      ) : null}
+          {showGraph ? (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+              <StepsPerDayGraph className="max-w-screen" />
+            </motion.div>
+          ) : null}
 
-      <div className="flex flex-col gap-2 lg:gap-4">
-        {showAverage ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
-            <div className="text-center mb-2 lg:mb-4">
-              That's an average of <span className="font-bold">{formatNumber(averageSteps, 'standard', 0)}</span> every single day!
-            </div>
+          <div className="flex flex-col gap-2 lg:gap-4">
+            {showAverage ? (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
+                <div className="text-center mb-2 lg:mb-4">
+                  That's an average of <span className="font-bold">{formatNumber(averageSteps, 'standard', 0)}</span> every single day!
+                </div>
+              </motion.div>
+            ) : null}
+
+            {showHuman ? (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
+                <div className="flex gap-2 items-center justify-between text-lg">
+                  <div>
+                    Did you know this puts you in the <span className="font-bold">{humanPercentile}th</span> percentile of all humans...
+                  </div>
+                  <div className="text-4xl">🚶</div>
+                </div>
+              </motion.div>
+            ) : null}
+
+            {showDog ? (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
+                <div className="flex gap-2 items-center justify-between text-lg">
+                  <div>
+                    ...but only the <span className="font-bold">{dogPercentile}th</span> percentile for dogs.
+                  </div>
+                  <div className="text-4xl">🐕</div>
+                </div>
+              </motion.div>
+            ) : null}
+          </div>
+        </>
+      ) : (
+        <>
+          <motion.div
+            initial={{ width: '0%' }}
+            animate={{ width: '100%' }}
+            transition={{
+              duration: sineGrowthDuration,
+              ease: 'easeInOut'
+            }}
+            className="overflow-hidden absolute inset-0"
+          >
+            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} />
+            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} />
           </motion.div>
-        ) : null}
-
-        {showHuman ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
-            <div className="flex gap-2 items-center justify-between text-lg">
-              <div>
-                Did you know this puts you in the <span className="font-bold">{humanPercentile}th</span> percentile of all humans...
-              </div>
-              <div className="text-4xl">🚶</div>
-            </div>
+          <motion.div
+            initial={{ width: '0%' }}
+            animate={{ width: '100%' }}
+            transition={{
+              delay: sineGrowthDuration, // Start after the first set finishes
+              duration: sineGrowthDuration,
+              ease: 'easeInOut'
+            }}
+            className="overflow-hidden absolute inset-0"
+          >
+            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
           </motion.div>
-        ) : null}
-
-        {showDog ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full">
-            <div className="flex gap-2 items-center justify-between text-lg">
-              <div>
-                ...but only the <span className="font-bold">{dogPercentile}th</span> percentile for dogs.
-              </div>
-              <div className="text-4xl">🐕</div>
-            </div>
-          </motion.div>
-        ) : null}
-      </div>
+        </>
+      )}
     </motion.div>
   );
 }

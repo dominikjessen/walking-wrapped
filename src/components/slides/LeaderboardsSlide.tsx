@@ -5,25 +5,31 @@ import { TEXT_REVEAL_ANIMATION_DURATION } from '@/lib/constants';
 import { useState, useEffect } from 'react';
 import { SlideProps } from '@/types';
 import SineWave from '../animations/SineWave';
+import DiagonalTransition from '../animations/DiagonalTransition';
 
 export default function LeaderboardsSlide({ onAnimationComplete }: SlideProps) {
   const { weeklyLeaderboards } = useLeaderboardStore();
 
   // Animation vs content
   const [showContent, setShowContent] = useState(false);
-  const sineGrowthDuration = 3;
+  const diagonalTransitionDuration = 6;
 
   const [showTitle, setShowTitle] = useState(false);
   const [showLeaderboards, setShowLeaderboards] = useState(false);
 
   // Animation control
   useEffect(() => {
-    setTimeout(() => setShowContent(true), sineGrowthDuration * 1000 * 2);
-    setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 2.25);
     setTimeout(() => {
-      setShowLeaderboards(true);
-      onAnimationComplete();
-    }, TEXT_REVEAL_ANIMATION_DURATION * 3);
+      setShowContent(true);
+
+      // Stagger content
+      setShowTitle(true);
+      // setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
+      setTimeout(() => {
+        setShowLeaderboards(true);
+        onAnimationComplete();
+      }, TEXT_REVEAL_ANIMATION_DURATION);
+    }, diagonalTransitionDuration * 1000);
   }, []);
 
   return (
@@ -31,7 +37,7 @@ export default function LeaderboardsSlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center h-[100dvh] bg-[#ffe1a8] overflow-hidden w-screen px-8"
+      className="flex flex-col items-center justify-center h-[100dvh] bg-slide-leaderboard-final overflow-hidden w-screen px-8"
     >
       {showContent ? (
         <div className="w-full flex flex-col gap-24 mx-auto">
@@ -58,45 +64,9 @@ export default function LeaderboardsSlide({ onAnimationComplete }: SlideProps) {
           ) : null}
         </div>
       ) : (
-        <>
-          <motion.div
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{
-              duration: sineGrowthDuration,
-              ease: 'easeInOut'
-            }}
-            className="overflow-hidden absolute inset-0"
-          >
-            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} />
-            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} />
-          </motion.div>
-          <motion.div
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{
-              delay: sineGrowthDuration, // Start after the first set finishes
-              duration: sineGrowthDuration,
-              ease: 'easeInOut'
-            }}
-            className="overflow-hidden absolute inset-0"
-          >
-            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-          </motion.div>
-        </>
+        <div className="flex flex-col items-center justify-center h-[100dvh] bg-slide-leaderboard-final overflow-hidden w-screen px-8">
+          <DiagonalTransition />
+        </div>
       )}
     </motion.div>
   );
