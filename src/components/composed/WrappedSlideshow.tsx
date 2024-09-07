@@ -65,6 +65,10 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  const restartWrapped = () => {
+    setCurrentSlide(0);
+  };
+
   const SlideComponent = slides[currentSlide];
 
   useEffect(() => {
@@ -82,8 +86,8 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
         <Button onClick={goToPrevSlide} disabled={currentSlide === 0 || navigationDisabled}>
           Prev
         </Button>
-        <Button onClick={goToNextSlide} disabled={currentSlide === slides.length - 1 || navigationDisabled}>
-          Next
+        <Button onClick={currentSlide === slides.length - 1 ? restartWrapped : goToNextSlide} disabled={navigationDisabled}>
+          {currentSlide === slides.length - 1 ? 'Restart' : 'Next'}
         </Button>
       </div>
     </div>
