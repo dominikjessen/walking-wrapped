@@ -126,7 +126,7 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
           ))}
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-sky-100 py-8 px-4 text-6xl lg:text-8xl">
+            <div className="bg-sky-100 py-4 px-2 text-6xl lg:text-8xl rounded-3xl">
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 2 }}>
                 Love is in the air
               </motion.div>

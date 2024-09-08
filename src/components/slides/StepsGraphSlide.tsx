@@ -61,8 +61,8 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
           ) : null}
 
           {showGraph ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-              <StepsPerDayGraph className="max-w-screen" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="px-12">
+              <StepsPerDayGraph className="w-4/5 mx-auto lg:w-full" />
             </motion.div>
           ) : null}
 

@@ -35,16 +35,16 @@
 [x] Start slideshow
 [x] Total steps
 [x] Step graph + average
-[] Best and worst day
+[x] Best and worst day
 [x] Leaderboards
 [x] Walking buddy
 
 # Other todo
 
-[] Total slide - mobile cards are ugly af
-[] Graph slide - graph is too wide (check final for correct html)
-[] Leaderboard - make gaps smaller for mobile
-[] Final slide - remove image button for now
+[x] Total slide - mobile cards are ugly af
+[x] Graph slide - graph is too wide (check final for correct html)
+[x] Leaderboard - make gaps smaller for mobile
+[x] Final slide - remove image button for now
 [] Update emails
 [] Get final data
 [] Check that control enabling is correctly done (can nest timeouts)

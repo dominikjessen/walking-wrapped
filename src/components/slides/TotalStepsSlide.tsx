@@ -56,11 +56,12 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
       });
 
       return controls.stop;
-    }, footStepDirectionChangeDelayConstant * 1000 + 2000 + numberOfFootsteps * footStepAnimationDuration * 1000 * 2);
+    }, footStepDirectionChangeDelayConstant * 1000 + 1000 + numberOfFootsteps * footStepAnimationDuration * 1000 * 2);
   }, [count, totalSteps]);
 
   // constant values
   const secondsStepped = totalSteps * STEPS_PER_SECOND;
+  const hoursStepped = (secondsStepped / 3600).toFixed();
   const totalKm = formatNumber(totalSteps / STEPS_PER_KM, 'standard', 2);
   const timeSpent = formatSecondsToHoursMinSecs(secondsStepped);
 
@@ -68,7 +69,7 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
   const funFacts: FunFact[] = [
     {
       topText: 'spent',
-      figureText: timeSpent.split(' ')[0],
+      figureText: `${hoursStepped}h`,
       bottomText: 'petting 🐈s'
     },
     {
@@ -119,18 +120,13 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
-              className="flex flex-col gap-2 lg:gap-4 w-full mt-4 lg:mt-12 text-center"
+              className="flex flex-col gap-4 w-full mt-8 lg:mt-12 text-center"
             >
               <div>In that time you could've also...</div>
-              <div className="flex gap-2 lg:gap-4 w-full overflow-x-auto xl:justify-center">
+              <div className="flex gap-2 lg:gap-4 w-full overflow-x-auto xl:justify-center items-stretch">
                 {funFacts.map((fact, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { delay: index * 0.75, duration: 0.5 } }}
-                    className="min-w-44 lg:min-w-52 min-h-44 lg:min-h-52"
-                  >
-                    <FunFactCard fact={fact} />
+                  <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: index * 0.75, duration: 0.5 } }}>
+                    <FunFactCard fact={fact} className="min-w-28 md:min-w-44 lg:min-w-52 min-h-36 md:min-h-44 lg:min-h-52" />
                   </motion.div>
                 ))}
               </div>
