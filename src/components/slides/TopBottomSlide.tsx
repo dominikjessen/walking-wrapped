@@ -27,12 +27,12 @@ export default function TopBottomSlide({ onAnimationComplete }: SlideProps) {
     setShowTopTitle(true);
     setTimeout(() => setShowTopSubTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0.75);
     setTimeout(() => setShowTopText(true), TEXT_REVEAL_ANIMATION_DURATION * 1.25);
-    setTimeout(() => setShowBottomTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 3);
-    setTimeout(() => setShowBottomSubTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 3.75);
+    setTimeout(() => setShowBottomTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 2.5);
+    setTimeout(() => setShowBottomSubTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 3.25);
     setTimeout(() => {
       setShowBottomText(true);
       onAnimationComplete();
-    }, TEXT_REVEAL_ANIMATION_DURATION * 4.5);
+    }, TEXT_REVEAL_ANIMATION_DURATION * 4);
   }
 
   return (

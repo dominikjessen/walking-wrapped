@@ -128,14 +128,14 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
             }}
             className="overflow-hidden absolute inset-0"
           >
-            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
-            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="#ffe1a8" />
+            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={40} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={62} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={88} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
+            <SineWave amplitude={73} frequency={0.2} growDuration={sineGrowthDuration} color="hsl(var(--slide-graph))" />
           </motion.div>
         </>
       )}
