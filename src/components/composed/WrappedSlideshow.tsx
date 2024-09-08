@@ -13,6 +13,7 @@ import { useUserProfileStore } from '@/stores/userProfileStore';
 import WalkingBuddySlide from '../slides/WalkingBuddySlide';
 import { useWalkingBuddiesStore } from '@/stores/walkingBuddiesStore';
 import TopBottomSlide from '../slides/TopBottomSlide';
+import { useRouter } from 'next/navigation';
 
 export interface WrappedSlideshowProps extends ComponentProps<'div'> {
   user: User;
@@ -57,6 +58,8 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   const [navigationDisabled, setNavigationDisabled] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const router = useRouter();
+
   const goToNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
@@ -66,7 +69,7 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   };
 
   const restartWrapped = () => {
-    setCurrentSlide(0);
+    router.push('/wrapped');
   };
 
   const SlideComponent = slides[currentSlide];
