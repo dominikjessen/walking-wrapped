@@ -48,7 +48,7 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center h-[100dvh] bg-sky-100 overflow-hidden w-screen px-8"
+      className="flex flex-col items-center justify-center h-[100dvh] bg-slide-walking-buddy overflow-hidden w-screen px-8"
     >
       {showContent ? (
         <div className="w-full flex flex-col gap-24 items-center text-center text-2xl">
@@ -126,7 +126,7 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
           ))}
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-sky-100 py-4 px-2 text-6xl lg:text-8xl rounded-3xl">
+            <div className="bg-slide-walking-buddy py-4 px-2 text-6xl lg:text-8xl rounded-3xl">
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 2 }}>
                 Love is in the air
               </motion.div>

@@ -51,7 +51,7 @@ export default function FinalSlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center bg-cyan-100 h-[100dvh] w-screen px-8 lg:overflow-y-auto"
+      className="flex flex-col items-center justify-center bg-slide-final h-[100dvh] w-screen px-8 lg:overflow-y-auto"
     >
       <div className="flex flex-col items-center gap-4 w-full">
         <div ref={imageRootRef} className={cn('flex flex-col items-center gap-4 w-full', isDownloadingImage && 'px-4 py-6')}>

@@ -38,6 +38,7 @@
 [x] Best and worst day
 [x] Leaderboards
 [x] Walking buddy
+[x] Final slide
 
 # Other todo
 

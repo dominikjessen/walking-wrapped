@@ -15,11 +15,15 @@ const config = {
     extend: {
       colors: {
         slide: {
+          total: 'hsl(var(--slide-total))',
+          graph: 'hsl(var(--slide-graph))',
           'top-bottom': 'hsl(var(--slide-top-bottom))',
           'leaderboard-one': 'hsl(var(--slide-leaderboard-one))',
           'leaderboard-two': 'hsl(var(--slide-leaderboard-two))',
           'leaderboard-three': 'hsl(var(--slide-leaderboard-three))',
-          'leaderboard-final': 'hsl(var(--slide-leaderboard-final))'
+          'leaderboard-final': 'hsl(var(--slide-leaderboard-final))',
+          'walking-buddy': 'hsl(var(--slide-walking-buddy))',
+          final: 'hsl(var(--slide-final))'
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

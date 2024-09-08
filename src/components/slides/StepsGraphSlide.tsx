@@ -50,7 +50,7 @@ export default function AverageStepsSlide({ onAnimationComplete }: SlideProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col gap-4 lg:gap-8 items-center justify-center bg-teal-100 h-[100dvh] overflow-hidden w-screen px-8"
+      className="flex flex-col gap-4 lg:gap-8 items-center justify-center bg-slide-graph h-[100dvh] overflow-hidden w-screen px-8"
     >
       {showContent ? (
         <>
