@@ -69,7 +69,7 @@ export default function WrappedSlideshow({ user }: WrappedSlideshowProps) {
   };
 
   const restartWrapped = () => {
-    router.push('/wrapped');
+    router.push('/');
   };
 
   const SlideComponent = slides[currentSlide];
