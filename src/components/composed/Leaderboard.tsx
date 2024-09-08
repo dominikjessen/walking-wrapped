@@ -13,7 +13,7 @@ export default function Leaderboard({ leaderboard, scrollable = false, fullSize 
   const { profile } = useUserProfileStore();
 
   return (
-    <div className={cn('flex flex-col gap-2 lg:gap-4 p-4 border rounded-xl bg-white', className)}>
+    <div className={cn('flex flex-col gap-2 lg:gap-4 p-2 md:p-4 border rounded-xl bg-white', className)}>
       <div className="flex gap-2 items-center justify-center font-bold text-xl lg:text-2xl text-card-foreground/80">
         <div>{formatDate(leaderboard.start_date)}</div>
         <div>-</div>
@@ -25,7 +25,7 @@ export default function Leaderboard({ leaderboard, scrollable = false, fullSize 
         {leaderboard.ranking.map((entry) => (
           <li
             key={entry.user_id}
-            className={cn('grid grid-cols-3 py-2 items-center px-2 rounded-xl', entry.user_id === profile?.id && 'bg-fuchsia-50')}
+            className={cn('grid grid-cols-3 py-1 md:py-2 items-center px-2 rounded-xl', entry.user_id === profile?.id && 'bg-fuchsia-50')}
           >
             <span className="text-2xl font-bold">{entry.rank}</span>
             <span className="font-bold">{entry.username}</span>
