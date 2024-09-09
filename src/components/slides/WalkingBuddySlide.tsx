@@ -25,7 +25,7 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
     }
   };
 
-  const heartPositions = generatePoissonDiskPositions(95, 105, 20, 20, 100);
+  const heartPositions = generatePoissonDiskPositions(90, 105, 20, 20, 100);
 
   // Staggered content reveal
   const [showBuddy, setShowBuddy] = useState(false);
@@ -60,16 +60,16 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
               className="w-full flex flex-col gap-4 items-center"
             >
               <div className="flex gap-2">
-                {topBuddies?.people.map((name, i) => (
-                  <div key={name} className="font-bold text-6xl lg:text-8xl">
-                    {name}
-                    {i < topBuddies.people.length - 1 ? ', ' : null}
+                {topBuddies?.people.slice(0, 3).map((name, i) => (
+                  <div key={name} className={`font-bold ${topBuddies?.people.length >= 3 ? 'text-4xl lg:text-6xl' : 'text-6xl lg:text-8xl'}`}>
+                    <span>{name}</span>
+                    <span>{i < 2 ? ' & ' : null}</span>
                   </div>
                 ))}
               </div>
               <div>
-                <span>{topBuddies!.people.length > 1 ? 'were' : 'was'}</span> your August walking{' '}
-                {topBuddies!.people.length > 1 ? 'buddies' : 'buddy'}.
+                <span>{topBuddies!.people.length > 1 ? 'were' : 'was'}</span> your August walking
+                {topBuddies!.people.length > 1 ? ' buddies' : ' buddy'}.
               </div>
             </motion.div>
           ) : null}
@@ -95,9 +95,9 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
               className="w-full flex flex-col gap-4 items-center"
             >
               {topBuddies!.people.length > 2 ? (
-                <div>Looks like you were quite popular this month, huh?</div>
+                <div>Looks like you were quite popular this month, huh? 😉</div>
               ) : topBuddies!.people.length > 1 ? (
-                <div>Guess you couldn't decide who to pick. Triangles are a nice shape anyway.</div>
+                <div>Guess you couldn't decide who to pick. Triangles are a nice shape anyway ▲.</div>
               ) : (
                 <div>So how many of those walks did you two go on together then? 👀</div>
               )}
