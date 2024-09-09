@@ -8,6 +8,8 @@ import { SlideProps } from '@/types';
 export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
   const { topBuddies } = useWalkingBuddiesStore();
 
+  const shownBuddies = topBuddies?.people.slice(0, 3);
+
   // Animation vs content
   const [showContent, setShowContent] = useState(false);
 
@@ -60,10 +62,10 @@ export default function WalkingBuddySlide({ onAnimationComplete }: SlideProps) {
               className="w-full flex flex-col gap-4 items-center"
             >
               <div className="flex gap-2">
-                {topBuddies?.people.slice(0, 3).map((name, i) => (
-                  <div key={name} className={`font-bold ${topBuddies?.people.length >= 3 ? 'text-4xl lg:text-6xl' : 'text-6xl lg:text-8xl'}`}>
+                {shownBuddies?.map((name, i) => (
+                  <div key={name} className={`font-bold ${shownBuddies.length >= 3 ? 'text-4xl lg:text-6xl' : 'text-6xl lg:text-8xl'}`}>
                     <span>{name}</span>
-                    <span>{i < 2 ? ' & ' : null}</span>
+                    <span>{i < shownBuddies.length - 1 ? ' & ' : null}</span>
                   </div>
                 ))}
               </div>

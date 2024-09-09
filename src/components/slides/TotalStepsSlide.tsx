@@ -47,12 +47,12 @@ export default function TotalStepsSlide({ onAnimationComplete }: SlideProps) {
       });
 
       controls.then(() => {
-        setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 1.5);
-        setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 2.5);
+        setTimeout(() => setShowKm(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 1);
+        setTimeout(() => setShowTime(true), COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 2);
         setTimeout(() => {
           setShowFunFacts(true);
-          onAnimationComplete();
-        }, COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3.5);
+          setTimeout(onAnimationComplete, 2000);
+        }, COUNT_ANIMATION_DURATION + TEXT_REVEAL_ANIMATION_DURATION * 3);
       });
 
       return controls.stop;

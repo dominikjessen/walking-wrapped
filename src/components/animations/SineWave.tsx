@@ -15,8 +15,6 @@ const SineWave = ({ amplitude = 20, frequency = 0.05, phase = 0, color = '#9bf6f
   const pathData = Array.from({ length: width }, (_, x) => {
     const y = amplitude * Math.sin(frequency * x + phase);
     return `${x * (width / 100)},${50 + y}`;
-
-    //    return `${x},${50 + y}`;
   }).join(' ');
 
   return (
@@ -25,7 +23,7 @@ const SineWave = ({ amplitude = 20, frequency = 0.05, phase = 0, color = '#9bf6f
         d={`M ${pathData}`}
         fill="transparent"
         stroke={color}
-        strokeWidth="6"
+        strokeWidth="8"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
         transition={{

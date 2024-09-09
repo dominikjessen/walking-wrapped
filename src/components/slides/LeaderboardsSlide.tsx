@@ -44,7 +44,7 @@ export default function LeaderboardsSlide({ onAnimationComplete }: SlideProps) {
       // setTimeout(() => setShowTitle(true), TEXT_REVEAL_ANIMATION_DURATION * 0);
       setTimeout(() => {
         setShowLeaderboards(true);
-        onAnimationComplete();
+        setTimeout(onAnimationComplete, 2.75);
       }, TEXT_REVEAL_ANIMATION_DURATION);
     }, diagonalTransitionDuration * 1000);
   }, []);
