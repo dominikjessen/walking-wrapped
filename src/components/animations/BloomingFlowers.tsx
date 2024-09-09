@@ -11,11 +11,11 @@ export default function BloomingFlowers({ onAllFlowersBloomed }: BloomingFlowers
   const [width, setWidth] = useState(window.innerWidth);
 
   // Boundaries for flowers
-  const maxSize = width / 8;
+  const maxSize = width / 6;
   const minSize = 30;
   const maxPetals = 7;
   const minPetals = 3;
-  const flowerCount = width > 600 ? 12 : 10;
+  const flowerCount = 12;
 
   // Four fixed size flowers, rest random
   const sizes = [maxSize, minSize, (maxSize + minSize) / 2, (maxSize + minSize) / 2];
@@ -53,6 +53,7 @@ export default function BloomingFlowers({ onAllFlowersBloomed }: BloomingFlowers
     { petalColor: '#FFD700', centerColor: '#8B4513' }, // Sunflower
     { petalColor: '#9370DB', centerColor: '#E6E6FA' }, // Lavender Fields
     { petalColor: '#FF8C00', centerColor: '#FAFAD2' }, // Tangerine Twist
+    { petalColor: '#FF1493', centerColor: '#FFE4E1' }, // Rose Garden
     { petalColor: '#FF6347', centerColor: '#FFB6C1' }, // Tropical Blossom
     { petalColor: '#4169E1', centerColor: '#FAEBD7' }, // Bluebell Dream
     { petalColor: '#FF4500', centerColor: '#FFD700' }, // Sunset Glow
@@ -61,9 +62,7 @@ export default function BloomingFlowers({ onAllFlowersBloomed }: BloomingFlowers
     { petalColor: '#98FB98', centerColor: '#F0FFF0' }, // Minty Fresh
     { petalColor: '#FF7F50', centerColor: '#FFE4B5' }, // Coral Reef
     { petalColor: '#4169E1', centerColor: '#FAEBD7' }, // Bluebell Dream
-    { petalColor: '#FF69B4', centerColor: '#FFF0F5' }, // Cotton Candy
-    { petalColor: '#FFB6C1', centerColor: '#FFDAB9' }, // Peachy Keen
-    { petalColor: '#FF1493', centerColor: '#FFE4E1' } // Rose Garden
+    { petalColor: '#FF69B4', centerColor: '#FFF0F5' } // Cotton Candy
   ];
 
   return (
