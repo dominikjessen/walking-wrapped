@@ -53,28 +53,28 @@ export default function FinalSlide({ onAnimationComplete }: SlideProps) {
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center bg-slide-final h-[100dvh] w-screen px-8 lg:overflow-y-auto"
     >
-      <div className="flex flex-col items-center gap-4 w-full">
-        <div ref={imageRootRef} className={cn('flex flex-col items-center gap-4 w-full', isDownloadingImage && 'px-4 py-6')}>
+      <div className="flex flex-col items-center gap-2 lg:gap-4 w-full">
+        <div ref={imageRootRef} className={cn('flex flex-col items-center gap-2 lg:gap-4 w-full', isDownloadingImage && 'px-4 py-6')}>
           <h1 className="text-3xl font-bold">Your steps in August</h1>
-          <div className="lg:hidden flex gap-4 justify-between">
+          <div className="lg:hidden flex gap-2 lg:gap-4 justify-between">
             <KPI title="Total" value={totalSteps} />
             <KPI title="Avg" value={averageSteps} />
           </div>
-          <StepsPerDayGraph className="min-h-0 max-h-80 max-w-screen" />
+          <StepsPerDayGraph className="min-h-0 max-h-72 max-w-screen" />
           <div className="lg:grid grid-cols-2 flex flex-col gap-4 w-full">
             <div className="hidden lg:flex flex-col gap-4 justify-center w-1/2 self-center">
               <KPI title="Total" value={totalSteps} />
               <KPI title="Avg" value={averageSteps} />
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2 lg:gap-4">
               <h2 className="text-2xl font-bold">Final Leaderboard</h2>
               <Leaderboard
                 key={`${monthlyLeaderboard?.start_date}-${monthlyLeaderboard?.end_date}`}
                 leaderboard={monthlyLeaderboard!}
                 scrollable={!isDownloadingImage}
                 fullSize={isDownloadingImage}
-                className="max-h-80"
+                className="max-h-72"
               />
             </div>
           </div>
